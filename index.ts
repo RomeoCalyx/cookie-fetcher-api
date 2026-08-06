@@ -107,12 +107,27 @@ async function fetchCookiesFromSite(
   let browser: Browser | null = null;
 
   try {
+    console.log(`[CookieFetcher] Fetching chromium executable path...`);
+    let execPath: string;
+    try {
+      execPath = await chromium.executablePath();
+      console.log(`[CookieFetcher] Chromium path resolved: ${execPath}`);
+    } catch (pathErr: any) {
+      console.error(`[CookieFetcher] Failed to get executable path: ${pathErr.message}`);
+      throw new Error(`Chromium binary path error: ${pathErr.message}`);
+    }
+
     console.log(`[CookieFetcher] Launching browser for: ${siteUrl}`);
-    browser = (await puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: (chromium as any).headless,
-    })) as unknown as Browser;
+    try {
+      browser = (await puppeteer.launch({
+        args: chromium.args,
+        executablePath: execPath,
+        headless: (chromium as any).headless ?? true,
+      })) as unknown as Browser;
+    } catch (launchErr: any) {
+      console.error(`[CookieFetcher] Puppeteer launch error: ${launchErr.message}`);
+      throw new Error(`Browser launch failed: ${launchErr.message}`);
+    }
 
     const page = await browser.newPage();
     page.setDefaultTimeout(30000);
