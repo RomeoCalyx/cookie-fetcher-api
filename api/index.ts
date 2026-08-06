@@ -339,14 +339,16 @@ const app = new Elysia()
     }
   );
 
-const PORT = Number(process.env.PORT) || 3001;
-
-app.listen(PORT, () => {
-  console.log(`\n${'='.repeat(52)}`);
-  console.log(`🍪  Cookie Fetcher API running on port ${PORT}`);
-  console.log(`📡  http://localhost:${PORT}/cookies?url=https://snapwc.com`);
-  console.log(`📦  Cache: http://localhost:${PORT}/cookies/cache`);
-  console.log(`${'='.repeat(52)}\n`);
-});
+if (!process.env.VERCEL) {
+  const PORT = Number(process.env.PORT) || 3001;
+  app.listen(PORT, () => {
+    console.log(`\n${'='.repeat(52)}`);
+    console.log(`🍪  Cookie Fetcher API running on port ${PORT}`);
+    console.log(`📡  http://localhost:${PORT}/cookies?url=https://snapwc.com`);
+    console.log(`📦  Cache: http://localhost:${PORT}/cookies/cache`);
+    console.log(`${'='.repeat(52)}\n`);
+  });
+}
 
 export default app.fetch;
+
