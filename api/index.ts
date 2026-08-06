@@ -8,7 +8,11 @@ import { Browser } from 'puppeteer-core';
 import retry from 'async-retry';
 import { existsSync } from 'fs';
 
-puppeteer.use(StealthPlugin());
+try {
+  puppeteer.use(StealthPlugin());
+} catch (e: any) {
+  console.warn('[StealthPlugin] Failed to initialize stealth plugin:', e?.message);
+}
 
 // ─── Smart Chromium Path ───────────────────────────────────────────────────────
 // @sparticuz/chromium works on serverless (Vercel/Lambda).
