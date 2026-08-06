@@ -7,31 +7,7 @@ import chromium from '@sparticuz/chromium';
 import { Browser } from 'puppeteer-core';
 import retry from 'async-retry';
 
-// Explicit static imports for all stealth evasions so Vercel bundler packages them
-import 'puppeteer-extra-plugin-stealth/evasions/chrome.app';
-import 'puppeteer-extra-plugin-stealth/evasions/chrome.csi';
-import 'puppeteer-extra-plugin-stealth/evasions/chrome.loadTimes';
-import 'puppeteer-extra-plugin-stealth/evasions/chrome.runtime';
-import 'puppeteer-extra-plugin-stealth/evasions/defaultArgs';
-import 'puppeteer-extra-plugin-stealth/evasions/iframe.contentWindow';
-import 'puppeteer-extra-plugin-stealth/evasions/media.codecs';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.hardwareConcurrency';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.languages';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.permissions';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.plugins';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.userAgent';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.vendor';
-import 'puppeteer-extra-plugin-stealth/evasions/navigator.webdriver';
-import 'puppeteer-extra-plugin-stealth/evasions/sourceurl';
-import 'puppeteer-extra-plugin-stealth/evasions/user-agent-override';
-import 'puppeteer-extra-plugin-stealth/evasions/webgl.vendor';
-import 'puppeteer-extra-plugin-stealth/evasions/window.outerdimensions';
-
-try {
-  puppeteer.use(StealthPlugin());
-} catch (e: any) {
-  console.warn('[StealthPlugin] Init error (safely ignored):', e?.message);
-}
+puppeteer.use(StealthPlugin());
 
 // ─── Cookie Cache ─────────────────────────────────────────────────────────────
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
@@ -107,27 +83,12 @@ async function fetchCookiesFromSite(
   let browser: Browser | null = null;
 
   try {
-    console.log(`[CookieFetcher] Fetching chromium executable path...`);
-    let execPath: string;
-    try {
-      execPath = await chromium.executablePath();
-      console.log(`[CookieFetcher] Chromium path resolved: ${execPath}`);
-    } catch (pathErr: any) {
-      console.error(`[CookieFetcher] Failed to get executable path: ${pathErr.message}`);
-      throw new Error(`Chromium binary path error: ${pathErr.message}`);
-    }
-
     console.log(`[CookieFetcher] Launching browser for: ${siteUrl}`);
-    try {
-      browser = (await puppeteer.launch({
-        args: chromium.args,
-        executablePath: execPath,
-        headless: (chromium as any).headless ?? true,
-      })) as unknown as Browser;
-    } catch (launchErr: any) {
-      console.error(`[CookieFetcher] Puppeteer launch error: ${launchErr.message}`);
-      throw new Error(`Browser launch failed: ${launchErr.message}`);
-    }
+    browser = (await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    })) as unknown as Browser;
 
     const page = await browser.newPage();
     page.setDefaultTimeout(30000);
@@ -307,5 +268,4 @@ const app = new Elysia()
     }
   );
 
-// Export Elysia app according to Vercel official documentation
-export default app;
+export default app.fetch;

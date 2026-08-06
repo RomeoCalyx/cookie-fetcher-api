@@ -1,25 +1,21 @@
 {
-  "name": "cookie-fetcher-api",
-  "version": "1.0.0",
-  "description": "Fetch cookies from any website using Puppeteer and Elysia",
-  "module": "api/index.ts",
-  "main": "api/index.ts",
-  "type": "module",
-  "dependencies": {
-    "@sinclair/typebox": "^0.34.52",
-    "@sparticuz/chromium": "^137.0.1",
-    "async-retry": "^1.3.3",
-    "elysia": "latest",
-    "puppeteer-core": "^24.12.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
-  },
-  "devDependencies": {
-    "@types/async-retry": "^1.4.9",
-    "bun-types": "latest",
-    "puppeteer": "^24.12.0",
-    "typescript": "^5.0.0"
-  },
-  "author": "Rômeo",
-  "license": "MIT"
+    "name": "cookie-fetcher-api",
+    "version": "1.0.0",
+    "description": "Fetch cookies from any website using Puppeteer and Elysia",
+    "module": "api/index.ts",
+    "type": "module",
+    "dependencies": {
+        "@sinclair/typebox": "^0.34.41",
+        "@sparticuz/chromium": "^137.0.1",
+        "async-retry": "^1.3.3",
+        "elysia": "latest",
+        "puppeteer-core": "^24.12.0",
+        "puppeteer-extra": "^3.3.6",
+        "puppeteer-extra-plugin-stealth": "^2.11.2"
+    },
+    "devDependencies": {
+        "bun-types": "latest"
+    },
+    "author": "Rômeo",
+    "license": "MIT"
 }
