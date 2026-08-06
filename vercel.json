@@ -1,7 +1,7 @@
 {
+    "bunVersion": "1.x",
     "functions": {
         "api/index.ts": {
-            "runtime": "@godsreveal/vercel-bun@0.2.4",
             "maxDuration": 45,
             "memory": 2048
         }
