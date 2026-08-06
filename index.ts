@@ -260,4 +260,5 @@ const app = new Elysia()
     }
   );
 
-export default app.fetch;
+// Export Elysia app according to Vercel official documentation
+export default app;
