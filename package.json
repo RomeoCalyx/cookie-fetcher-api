@@ -14,8 +14,10 @@
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "devDependencies": {
+    "@types/async-retry": "^1.4.9",
     "bun-types": "latest",
-    "puppeteer": "^25.5.0"
+    "puppeteer": "^25.5.0",
+    "typescript": "^5.0.0"
   },
   "author": "Romeo Calyx",
   "license": "MIT"

@@ -23,7 +23,7 @@ async function getChromiumExecutable(): Promise<{ executablePath: string; headle
   if (IS_SERVERLESS) {
     const path = await chromium.executablePath();
     console.log('[Chromium] Serverless mode — using @sparticuz/chromium:', path);
-    return { executablePath: path, headless: chromium.headless };
+    return { executablePath: path, headless: true };
   }
   // Local dev: use puppeteer's auto-downloaded Chromium
   const { default: puppeteerVanilla } = await import('puppeteer');
