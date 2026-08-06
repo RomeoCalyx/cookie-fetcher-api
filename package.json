@@ -2,8 +2,8 @@
   "name": "cookie-fetcher-api",
   "version": "1.0.0",
   "description": "Fetch cookies from any website using Puppeteer and Elysia",
-  "module": "src/index.ts",
-  "main": "src/index.ts",
+  "module": "api/index.ts",
+  "main": "api/index.ts",
   "type": "module",
   "dependencies": {
     "@sinclair/typebox": "^0.34.52",
