@@ -27,7 +27,11 @@ import 'puppeteer-extra-plugin-stealth/evasions/user-agent-override';
 import 'puppeteer-extra-plugin-stealth/evasions/webgl.vendor';
 import 'puppeteer-extra-plugin-stealth/evasions/window.outerdimensions';
 
-puppeteer.use(StealthPlugin());
+try {
+  puppeteer.use(StealthPlugin());
+} catch (e: any) {
+  console.warn('[StealthPlugin] Init error (safely ignored):', e?.message);
+}
 
 // ─── Cookie Cache ─────────────────────────────────────────────────────────────
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
@@ -171,6 +175,14 @@ async function fetchCookiesFromSite(
 
 // ─── Elysia App ───────────────────────────────────────────────────────────────
 const app = new Elysia()
+
+  .onError(({ error, set }) => {
+    set.status = 500;
+    return {
+      success: false,
+      error: error.message || 'Internal Server Error',
+    };
+  })
 
   .get('/', () => ({
     status: 'Cookie Fetcher API running 🍪',
