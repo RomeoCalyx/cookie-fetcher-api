@@ -1,0 +1,22 @@
+{
+  "name": "cookie-fetcher-api",
+  "version": "1.0.0",
+  "description": "Fetch cookies from any website using Puppeteer and Elysia",
+  "module": "api/index.ts",
+  "type": "module",
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.52",
+    "@sparticuz/chromium": "^149.0.0",
+    "async-retry": "^1.3.3",
+    "elysia": "latest",
+    "puppeteer": "^25.5.0",
+    "puppeteer-core": "^25.5.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "author": "Romeo Calyx",
+  "license": "MIT"
+}
