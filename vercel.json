@@ -1,14 +1,15 @@
 {
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 60,
-      "includeFiles": "node_modules/puppeteer-extra**"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/index.ts"
-    }
-  ]
+    "functions": {
+        "api/index.ts": {
+            "runtime": "@godsreveal/vercel-bun@0.2.4",
+            "maxDuration": 45,
+            "memory": 2048
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api/index.ts"
+        }
+    ]
 }
