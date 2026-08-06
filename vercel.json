@@ -1,4 +1,5 @@
 {
+    "framework": null,
     "bunVersion": "1.x",
     "functions": {
         "api/index.ts": {
