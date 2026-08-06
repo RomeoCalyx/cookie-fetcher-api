@@ -87,7 +87,7 @@ async function fetchCookiesFromSite(
     browser = (await puppeteer.launch({
       args: chromium.args,
       executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
+      headless: (chromium as any).headless,
     })) as unknown as Browser;
 
     const page = await browser.newPage();
