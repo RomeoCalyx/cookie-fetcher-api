@@ -3,8 +3,7 @@
     "bunVersion": "1.x",
     "functions": {
         "api/index.ts": {
-            "maxDuration": 45,
-            "memory": 2048
+            "maxDuration": 45
         }
     },
     "rewrites": [
