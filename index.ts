@@ -180,7 +180,7 @@ const app = new Elysia()
     set.status = 500;
     return {
       success: false,
-      error: error.message || 'Internal Server Error',
+      error: (error as any)?.message || String(error) || 'Internal Server Error',
     };
   })
 
