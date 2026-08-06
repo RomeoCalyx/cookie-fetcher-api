@@ -267,4 +267,4 @@ const app = new Elysia()
     }
   );
 
-export default app.fetch;
+export default { fetch: app.fetch };
