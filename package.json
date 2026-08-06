@@ -9,7 +9,9 @@
     "@sparticuz/chromium": "^137.0.1",
     "async-retry": "^1.3.3",
     "elysia": "latest",
-    "puppeteer-core": "^24.12.0"
+    "puppeteer-core": "^24.12.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "devDependencies": {
     "@types/async-retry": "^1.4.9",
